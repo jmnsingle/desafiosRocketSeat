@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Exercicio 01</title>
+    <style>
+    
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+
+
+    .box {
+        height: 100px;
+        width: 100px;
+        background-color: red;
+        position: absolute;
+        border-radius: 5;
+    }
+
+    </style>
+</head>
+<body onload="lodUl()">
+    <div class="container">
+
+        <button onclick="createBox()">Gerar box</button>
+        <ul id="item">
+            
+        </ul>
+        <input type="text" id="nome" name="nome">
+        <button onClick="createLi()">Adicionar</button>
+
+    </div>
+
+    <script>
+
+        var nomes = ["Diego", "Gabriel", "Lucas"]   
+
+        function lodUl() {
+            var ul = document.getElementById("item").innerHTML
+            //console.log(ul)
+            
+            item = item + "<li>" + nomes[0] + "</li>"
+            item = item + "<li>" + nomes[1] + "</li>"
+            item = item + "<li>" + nomes[2] + "</li>"
+
+            document.getElementById("item").innerHTML = item
+            //document.appendChild(ul)
+
+        }
+
+        function createLi () {
+            var item = document.getElementById("item").innerHTML
+            var name = document.getElementById("nome").value
+
+            item = item + "<li>" + name + "</li>"
+
+            document.getElementById("item").innerHTML = item
+
+        }
+
+        var p1 = 0
+        var p2 = 0
+
+        function createBox() {
+            
+            //cria um elemento novo e armazena na variavel box
+            var box = document.createElement("div")
+            //adciona um atributo no elemento criado 
+            //elemento criado => <div class="box"></div>
+            box.setAttribute("class", "box")
+            
+            p1 = p1 + 100
+            if(p1 >= 1100) {
+                p2 = p2 + 100
+                p1 = 100
+            }
+            console.log(p1)
+            //if(p2 < 100) {
+            //    p2 += 100
+            //}
+            
+            box.setAttribute("style", "left:"+p1+"px; top:"+p2+"px;")
+            box.setAttribute("onClick", "removeBox(this)")
+            box.setAttribute("onmouseOver", `getRandomColor(this)`)
+            
+            //elemento criado após atributos aplicados
+            //<div class="box" style="left: p1 ; top: p2 ;" onClick="estourar(this)">
+
+            //mostrar o elemento criado na tela no body da tela    
+            document.body.appendChild(box)
+
+        }
+
+        function removeBox (elemento) {
+            document.body.removeChild(elemento)
+        }
+
+        function getRandomColor(elemento) {
+            //console.log(elemento)
+            var letters = "0123456789ABCDEF";
+            var color = "#";
+            for (var i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+                //console.log(color)
+            }
+            elemento.setAttribute("style", `background-color: ${color}`)
+        //return color;
+        }       
+        
+    </script>
+
+</body>
+</html>
